@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USER_ACTIVITY</title>
+    <link rel="stylesheet" href="../static/user_activity/css/index.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+</head>
+<body>
+<!-- Navbar brand -->
+<header class="page-width">
+    <div class="clearfix">
+        <em class="name">
+            USER ACTIVITY
+        </em>
+        <nav>
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">Home</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="button-container">
+    <input type="button" id="response-button" value="Click to see response">
+</div>
+
+<script>
+    $("#response-button").click(function() {
+
+            $.ajax({
+                type: "GET",
+                url: "get_json",
+                async: true,
+                dataType: "json",
+                success: function(response){
+                    $(".page-width").hide();
+                    $("#response-button").hide();
+                    response = JSON.stringify(response);
+                    $(".button-container").html(response);
+
+                },
+             })
+        });
+</script>
